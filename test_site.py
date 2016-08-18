@@ -7,7 +7,6 @@ test_site_port = os.environ['test_site_port'] or 8080
 
 @route('/')
 def index():
-    global test_site_host
     message = test_site_host
     now_time = datetime.datetime.now()
     cur_hour = now_time.hour
@@ -17,14 +16,12 @@ def index():
 
 @route('/static/<filename>')
 def server_static(filename):
-    global BASE_DIR
     static_dir = BASE_DIR + 'static'
     return static_file(filename,
                        root=static_dir)
 
 @route('/images/<filename>')
 def server_static_dir(filename):
-    global BASE_DIR
     img_dir = BASE_DIR + 'images'
     return static_file(filename,
                        root=img_dir,
@@ -36,5 +33,4 @@ def mistake(code):
     return 'Error on page'
 
 if __name__ == "__main__":
-   global test_site_host, port
    run(host=test_site_host, port=test_site_port, debug=True)
