@@ -2,8 +2,8 @@ import datetime, os
 from bottle import route, run, template, static_file, error
 
 BASE_DIR = os.path.dirname(__file__) + os.path.sep
-test_site_host = os.environ['test_site_host'] or 'localhost'
-test_site_port = int(os.environ['test_site_port']) or 8080
+test_site_host = str(os.getenv('test_site_host', 'localhost'))
+test_site_port = int(os.getenv('test_site_port', 8080))
 
 @route('/')
 def index():
