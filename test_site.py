@@ -2,10 +2,12 @@ import datetime, os
 from bottle import route, run, template, static_file, error
 
 BASE_DIR = os.path.dirname(__file__) + os.path.sep
+host = os.environ['test_site_host'] or 'localhost'
 
 @route('/')
 def index():
-    message = "h562.net"
+    global host
+    message = host
     now_time = datetime.datetime.now()
     cur_hour = now_time.hour
     return template('index',
@@ -14,12 +16,14 @@ def index():
 
 @route('/static/<filename>')
 def server_static(filename):
+    global BASE_DIR
     static_dir = BASE_DIR + 'static'
     return static_file(filename,
                        root=static_dir)
 
 @route('/images/<filename>')
 def server_static_dir(filename):
+    global BASE_DIR
     img_dir = BASE_DIR + 'images'
     return static_file(filename,
                        root=img_dir,
@@ -31,4 +35,5 @@ def mistake(code):
     return 'Error on page'
 
 if __name__ == "__main__":
-   run(host='ovz1', port=8080)
+   global host
+   run(host=host, port=8080, debug=True)
