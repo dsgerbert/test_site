@@ -2,12 +2,13 @@ import datetime, os
 from bottle import route, run, template, static_file, error
 
 BASE_DIR = os.path.dirname(__file__) + os.path.sep
-host = os.environ['test_site_host'] or 'localhost'
+test_site_host = os.environ['test_site_host'] or 'localhost'
+test_site_port = os.environ['test_site_port'] or 8080
 
 @route('/')
 def index():
-    global host
-    message = host
+    global test_site_host
+    message = test_site_host
     now_time = datetime.datetime.now()
     cur_hour = now_time.hour
     return template('index',
@@ -35,5 +36,5 @@ def mistake(code):
     return 'Error on page'
 
 if __name__ == "__main__":
-   global host
-   run(host=host, port=8080, debug=True)
+   global test_site_host, port
+   run(host=test_site_host, port=test_site_port, debug=True)
