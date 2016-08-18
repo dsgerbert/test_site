@@ -1,2 +1,4 @@
 # test_site
-Python project for test vps hosting
+Python (using bottle) project for test vps hosting
+
+Our aim - beautiful site, with some system information 
