@@ -8,8 +8,7 @@ def index():
     message = "h562.net"
     now_time = datetime.datetime.now()
     cur_hour = now_time.hour
-    temp_dir = BASE_DIR + '/templates/index'
-    return template(temp_dir,
+    return template('index',
                     cur_hour=cur_hour,
                     msg=message)
 
